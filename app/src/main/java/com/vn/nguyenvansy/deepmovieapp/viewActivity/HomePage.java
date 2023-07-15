@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.vn.nguyenvansy.deepmovieapp.MainActivity;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.viewFragment.ContentMovieFragment;
 import com.vn.nguyenvansy.deepmovieapp.viewFragment.FavourieFragment;
