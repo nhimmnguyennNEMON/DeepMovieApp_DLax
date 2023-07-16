@@ -1,16 +1,12 @@
-package com.vn.nguyenvansy.deepmovieapp.viewFragment;
+package com.vn.nguyenvansy.deepmovieapp.viewActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,18 +22,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.models.User;
-import com.vn.nguyenvansy.deepmovieapp.viewActivity.Login;
-import com.vn.nguyenvansy.deepmovieapp.viewActivity.Setting;
+import com.vn.nguyenvansy.deepmovieapp.viewFragment.ContentMovieFragment;
+import com.vn.nguyenvansy.deepmovieapp.viewFragment.ProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+public class Setting extends AppCompatActivity {
 
-public class ProfileFragment extends Fragment {
-
-    private View view;
-    private Button btnLogout;
-    private Button btnSetting;
+    private Button btnChatWithAI;
+    private Button btnChangePassword;
+    private Button btnHelp;
+    private ImageView imgBack;
+    private ContentMovieFragment contentFragment;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private FirebaseFirestore firestore;
@@ -45,26 +42,25 @@ public class ProfileFragment extends Fragment {
     private TextView txtName;
 
     void bindingView() {
-        btnLogout = view.findViewById(R.id.btnLogout);
-        btnSetting = view.findViewById(R.id.btnSetting);
-        imgProfile = view.findViewById(R.id.imgProfile);
-        txtName = view.findViewById(R.id.txtName);
+        btnChatWithAI = findViewById(R.id.btnChatWithAI);
+        btnChangePassword = findViewById(R.id.btnChangePassword);
+        btnHelp = findViewById(R.id.btnHelp);
+        imgBack = findViewById(R.id.imgBack);
+        imgProfile = findViewById(R.id.imgProfile);
+        txtName = findViewById(R.id.txtName);
     }
 
     void bindingAction() {
-        btnLogout.setOnClickListener(this::onClickBtnLogout);
-        btnSetting.setOnClickListener(this::onClickBtnSetting);
+        btnChatWithAI.setOnClickListener(this::onClickChatAI);
+        btnChangePassword.setOnClickListener(this::onClickChangPass);
+        btnHelp.setOnClickListener(this::onClickBtnHelp);
+        imgBack.setOnClickListener(this::onClickBtnBack);
     }
 
-    private void onClickBtnSetting(View view) {
-        Intent intent = new Intent(getContext(), Setting.class);
+    private void onClickBtnBack(View view) {
+        Intent intent = new Intent(getApplicationContext(), HomePage.class);
         startActivity(intent);
-    }
-
-    private void onClickBtnLogout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(getContext(), Login.class);
-        startActivity(intent);
+        finish();
     }
 
     void setupProfile() {
@@ -78,7 +74,7 @@ public class ProfileFragment extends Fragment {
                         User user = document.toObject(User.class);
                         userList.add(user);
                     }
-                    for (User user : userList) {
+                    for (User user: userList) {
                         Log.w("sy.nguyenvan", user.getUserId() + "---" + currentUser.getUid());
                         if (user.getUserId().contentEquals(currentUser.getUid())) {
                             String imageUrl = user.getProfile();
@@ -93,21 +89,29 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    private void onClickBtnHelp(View view) {
+
+    }
+
+    private void onClickChangPass(View view) {
+        Intent intent = new Intent(getApplicationContext(), ForgotPassword.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void onClickChatAI(View view) {
+
+    }
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
         bindingView();
         bindingAction();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         firestore = FirebaseFirestore.getInstance();
         setupProfile();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_profile, container, false);
-        return view;
     }
 }

@@ -70,9 +70,15 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     private void onClickBtnBack(View view) {
-        Intent intent = new Intent(getApplicationContext(), Login.class);
-        startActivity(intent);
-        finish();
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(getApplicationContext(), Setting.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
