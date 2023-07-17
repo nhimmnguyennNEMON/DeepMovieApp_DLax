@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.models.Movie;
 
@@ -36,7 +37,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Movie movie = listMovie.get(position);
         if (movie == null) { return; }
 
-        holder.imgFilm.setImageResource(movie.getId());
+        Picasso.get().load(movie.getUrlImageMovie()).into(holder.imgFilm);
+        //holder.imgFilm.setImageResource(movie.getId());
         holder.textNameMovie.setText(movie.getTitle());
         Log.w("sy.nguyenvan", "MovieAdapter " + movie.getId());
     }

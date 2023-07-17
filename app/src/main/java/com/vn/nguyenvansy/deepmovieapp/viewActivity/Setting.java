@@ -34,7 +34,6 @@ public class Setting extends AppCompatActivity {
     private Button btnChangePassword;
     private Button btnHelp;
     private ImageView imgBack;
-    private ContentMovieFragment contentFragment;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private FirebaseFirestore firestore;

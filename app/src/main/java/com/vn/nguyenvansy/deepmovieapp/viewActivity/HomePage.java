@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.vn.nguyenvansy.deepmovieapp.MainActivity;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.viewFragment.ContentMovieFragment;
+import com.vn.nguyenvansy.deepmovieapp.viewFragment.DetailMovieFragment;
 import com.vn.nguyenvansy.deepmovieapp.viewFragment.FavourieFragment;
 import com.vn.nguyenvansy.deepmovieapp.viewFragment.ProfileFragment;
 import com.vn.nguyenvansy.deepmovieapp.viewFragment.SearchFragment;
@@ -28,6 +29,7 @@ public class HomePage extends AppCompatActivity {
     private FavourieFragment favourieFragment;
     private SearchFragment searchFragment;
     private ProfileFragment profileFragment;
+    private DetailMovieFragment detailMovieFragment;
 
     void bindingView() {
         btnHome = findViewById(R.id.imageView);
@@ -55,12 +57,12 @@ public class HomePage extends AppCompatActivity {
     }
 
     private void onClickBtnFavourie(View view) {
-        if (favourieFragment == null) {
-            favourieFragment = new FavourieFragment();
+        if (detailMovieFragment == null) {
+            detailMovieFragment = new DetailMovieFragment();
         }
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, favourieFragment)
+                .replace(R.id.fragmentContainerView, detailMovieFragment)
                 .addToBackStack(null)
                 .commit();
     }

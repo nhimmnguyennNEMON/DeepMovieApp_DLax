@@ -22,9 +22,6 @@
             android:name=".viewActivity.ReviewsMovie"
             android:exported="false" />
         <activity
-            android:name=".viewActivity.DetailMovie"
-            android:exported="false" />
-        <activity
             android:name=".viewActivity.HomePage"
             android:exported="false" />
         <activity

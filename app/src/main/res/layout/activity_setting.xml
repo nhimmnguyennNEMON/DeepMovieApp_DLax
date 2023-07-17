@@ -133,4 +133,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnChangePassword" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/img_14"
+        app:layout_constraintBottom_toBottomOf="@+id/btnHelp"
+        app:layout_constraintEnd_toEndOf="@+id/btnHelp"
+        app:layout_constraintTop_toTopOf="@+id/btnHelp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/img_14"
+        app:layout_constraintBottom_toBottomOf="@+id/btnChangePassword"
+        app:layout_constraintEnd_toEndOf="@+id/btnChangePassword"
+        app:layout_constraintTop_toTopOf="@+id/btnChangePassword" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/img_14"
+        app:layout_constraintBottom_toBottomOf="@+id/btnChatWithAI"
+        app:layout_constraintEnd_toEndOf="@+id/btnChatWithAI"
+        app:layout_constraintTop_toTopOf="@+id/btnChatWithAI" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
