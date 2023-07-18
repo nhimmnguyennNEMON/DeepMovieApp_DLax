@@ -34,12 +34,6 @@ public class DetailMovieFragment extends Fragment {
     private ExoPlayer player;
     private StyledPlayerView playerView;
 
-    public static Fragment newInstance(Movie movie) {
-        MovieAdapter adapter = new MovieAdapter();
-        adapter.setOnItemClickListener();
-        return null;
-    }
-
     void bindingView() {
         playerView = view.findViewById(R.id.player_view);
     }
@@ -48,17 +42,27 @@ public class DetailMovieFragment extends Fragment {
 
     }
 
-    void setupRecyclerView() {
+    void setupContentMovie() {
 
     }
 
-    void setupViewPlayMovie(String videoUrl) {
-        player = new ExoPlayer.Builder(getActivity()).build();
-        playerView.setPlayer(player);
-        MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-        player.setMediaItem(mediaItem);
-        player.prepare();
-        player.setPlayWhenReady(true);
+    void setupViewPlayMovie() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Movie movie = (Movie) bundle.getParcelable("movie");
+            player = new ExoPlayer.Builder(getActivity()).build();
+            playerView.setPlayer(player);
+            MediaItem mediaItem = MediaItem.fromUri(movie.getUrlMovie());
+            player.setMediaItem(mediaItem);
+            player.prepare();
+            player.setPlayWhenReady(true);
+        }
+    }
+
+    public static DetailMovieFragment newInstance(Bundle bundle) {
+        DetailMovieFragment fragment = new DetailMovieFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -66,7 +70,7 @@ public class DetailMovieFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bindingView();
         bindingAction();
-        setupViewPlayMovie("https://rr2---sn-42u-i5oey.googlevideo.com/videoplayback?expire=1689629060&ei=JF21ZMrwDrmFsfIP-7abkAQ&ip=102.129.232.231&id=o-AIEgrFuvVthxWOM-UkE6N1gV5EbOYZnayJZJAZJ_Cvmr&itag=18&source=youtube&requiressl=yes&spc=Ul2Sq0pWF7MNa2_W6BNkXEWSiZQdPvuHPM21svXVVA&vprv=1&svpuc=1&mime=video%2Fmp4&ns=rV69eJu3L6W6Ep165dqpQu0O&gir=yes&clen=21473866&ratebypass=yes&dur=263.407&lmt=1689292769033676&fexp=24007246,24350018,51000024&beids=24350018&c=WEB&txp=4538434&n=YWHsRRlt2ONKnw&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Cns%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIhAMQWQqxipFU83G05uznWOtlrM-tfgdp4LJ8_Dc-IpKDGAiBjhkwZLEE31q7K2LwGOmCFNXjVzd9BBmYhapNrQnSOAA%3D%3D&redirect_counter=1&rm=sn-q4fez67z&req_id=faff97f51f62a3ee&cms_redirect=yes&cmsv=e&ipbypass=yes&mh=wF&mip=1.53.223.232&mm=31&mn=sn-42u-i5oey&ms=au&mt=1689606682&mv=u&mvi=2&pl=23&lsparams=ipbypass,mh,mip,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRgIhAOj7hTM3jB0c_54x0amGd-wOa0gR7cM6i4k7nyGQY9HgAiEAqoLOU2_aNVNFy4eqd-vxpwjRkSh_BCwuiv0YY6Mmu3M%3D");
+        setupViewPlayMovie();
     }
 
     @Override

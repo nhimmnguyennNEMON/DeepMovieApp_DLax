@@ -17,11 +17,22 @@ import com.vn.nguyenvansy.deepmovieapp.models.Movie;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
+
 public class ListMovieGenreAdapter extends RecyclerView.Adapter<ListMovieGenreAdapter.ListGenreViewHolder> {
 
     private Context context;
     private List<ListMovieGenre> listMovieGenre;
+    private BehaviorSubject<Movie> objectSubject = BehaviorSubject.create();
 
+    public Observable<Movie> getObjectObservable() {
+        return objectSubject;
+    }
+
+    public void passObject(Movie object) {
+        objectSubject.onNext(object);
+    }
     public ListMovieGenreAdapter(Context context) {
         this.context = context;
     }
@@ -52,8 +63,17 @@ public class ListMovieGenreAdapter extends RecyclerView.Adapter<ListMovieGenreAd
 
         MovieAdapter movieAdapter = new MovieAdapter();
         movieAdapter.setData(listGenre.getMovies());
+
+
+        movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Movie movie) {
+                Log.w("sy.nguyenvan", "ListMovieGenreAdapter " + movie.getTitle());
+                passObject(movie);
+            }
+        });
         holder.rcv_Movie.setAdapter(movieAdapter);
-        Log.w("sy.nguyenvan", "ListMovieGenreAdapter " + listGenre.getMovies().size());
+        //Log.w("sy.nguyenvan", "ListMovieGenreAdapter " + listGenre.getMovies().size());
     }
 
     @Override

@@ -1,9 +1,37 @@
 package com.vn.nguyenvansy.deepmovieapp.models;
 
-public class Movie {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Movie implements Parcelable {
 
     public Movie() {
     }
+
+    protected Movie(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        urlImageMovie = in.readString();
+        genre = in.readString();
+        director = in.readString();
+        releaseDate = in.readString();
+        description = in.readString();
+        urlMovie = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -90,4 +118,20 @@ public class Movie {
 
     private String urlMovie;
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(title);
+        parcel.writeString(urlImageMovie);
+        parcel.writeString(genre);
+        parcel.writeString(director);
+        parcel.writeString(releaseDate);
+        parcel.writeString(description);
+        parcel.writeString(urlMovie);
+    }
 }

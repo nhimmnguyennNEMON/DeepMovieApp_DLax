@@ -10,12 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
@@ -28,15 +26,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.itemConfigAdapter.ListMovieGenreAdapter;
-import com.vn.nguyenvansy.deepmovieapp.itemConfigAdapter.MovieAdapter;
-import com.vn.nguyenvansy.deepmovieapp.models.HotPicMovie;
 import com.vn.nguyenvansy.deepmovieapp.models.ListMovieGenre;
 import com.vn.nguyenvansy.deepmovieapp.models.Movie;
+import com.vn.nguyenvansy.deepmovieapp.utils.DataRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class ContentMovieFragment extends Fragment implements MovieAdapter.OnItemClickListener{
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class ContentMovieFragment extends Fragment {
 
     private View view;
     private RecyclerView rcv_contentViewMovie;
@@ -46,6 +49,31 @@ public class ContentMovieFragment extends Fragment implements MovieAdapter.OnIte
 
     List<ListMovieGenre> listMovieGenre = new ArrayList<>();
     List<Movie> listMovies = new ArrayList<>();
+
+    Disposable disposable;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        disposable = listMovieGenreAdapter.getObjectObservable()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object -> {
+                    Log.w("sy.nguyenvan", "Có data rồi nè " + object.getTitle());
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("movie", object);
+                    DetailMovieFragment fragmentB = DetailMovieFragment.newInstance(bundle);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainerView, fragmentB);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                });
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        disposable.dispose();
+    }
     void bindingView() {
         rcv_contentViewMovie = view.findViewById(R.id.rcv_contentViewMovie);
         playerView = view.findViewById(R.id.player_view);
@@ -62,7 +90,6 @@ public class ContentMovieFragment extends Fragment implements MovieAdapter.OnIte
                 RecyclerView.VERTICAL,
                 false);
         rcv_contentViewMovie.setLayoutManager(linearLayoutManager);
-
         listMovieGenreAdapter.setData(getListMovieForGenre());
         rcv_contentViewMovie.setAdapter(listMovieGenreAdapter);
     }
@@ -109,13 +136,6 @@ public class ContentMovieFragment extends Fragment implements MovieAdapter.OnIte
         super.onViewCreated(view, savedInstanceState);
         bindingView();
         setupRecyclerView();
-        MovieAdapter adapter = new MovieAdapter();
-        adapter.setOnItemClickListener();
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        Toast.makeText(requireContext(), "Clicked item at position: " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override

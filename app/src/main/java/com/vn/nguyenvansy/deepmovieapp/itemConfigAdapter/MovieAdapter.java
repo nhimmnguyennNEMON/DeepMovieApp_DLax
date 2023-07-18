@@ -16,21 +16,23 @@ import com.vn.nguyenvansy.deepmovieapp.models.Movie;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.subjects.PublishSubject;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
 
     private List<Movie> listMovie;
     private OnItemClickListener listener;
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener() {
-        this.listener = listener;
-    }
 
     public void setData(List<Movie> list) {
         this.listMovie = list;
         notifyDataSetChanged();
+    }
+    public interface OnItemClickListener {
+        void onItemClick(Movie movie);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -47,16 +49,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         Picasso.get().load(movie.getUrlImageMovie()).into(holder.imgFilm);
         holder.textNameMovie.setText(movie.getTitle());
-        Log.w("sy.nguyenvan", "MovieAdapter " + movie.getId());
+        //Log.w("sy.nguyenvan", "MovieAdapter " + movie.getId());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.imgFilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
-                    listener.onItemClick(position);
+                    listener.onItemClick(movie);
+                    //Log.w("sy.nguyenvan", "MovieAdapter " + listener);
                 }
             }
         });
+
     }
 
     @Override
