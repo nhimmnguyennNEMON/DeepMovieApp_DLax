@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -89,7 +90,9 @@ public class Setting extends AppCompatActivity {
     }
 
     private void onClickBtnHelp(View view) {
-
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:0917076864"));
+        startActivity(callIntent);
     }
 
     private void onClickChangPass(View view) {

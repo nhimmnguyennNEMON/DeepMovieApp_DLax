@@ -37,7 +37,7 @@
             android:id="@+id/textNameFilmValue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Search..."
+            android:hint="Input Name Movie ..."
             android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -52,5 +52,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textNameFilm"
         app:srcCompat="@drawable/img_10" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_contentViewMovieSearch"
+        android:layout_width="373dp"
+        android:layout_height="539dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNameFilm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
