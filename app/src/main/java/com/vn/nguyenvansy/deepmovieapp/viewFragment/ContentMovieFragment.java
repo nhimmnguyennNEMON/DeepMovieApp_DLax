@@ -28,6 +28,7 @@ import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.itemConfigAdapter.ListMovieGenreAdapter;
 import com.vn.nguyenvansy.deepmovieapp.models.ListMovieGenre;
 import com.vn.nguyenvansy.deepmovieapp.models.Movie;
+import com.vn.nguyenvansy.deepmovieapp.utils.DataCenter;
 import com.vn.nguyenvansy.deepmovieapp.utils.DataRepository;
 
 import java.util.ArrayList;

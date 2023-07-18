@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="65dp"
         android:textColorHint="@color/textgray"
         app:layout_constraintEnd_toEndOf="@+id/btnSearchFilm"
@@ -37,7 +37,7 @@
             android:id="@+id/textNameFilmValue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Input Name Movie ..."
+            android:hint="Searching..."
             android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +58,7 @@
         android:layout_width="373dp"
         android:layout_height="539dp"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="21dp"
         android:layout_marginBottom="21dp"
         app:layout_constraintBottom_toBottomOf="parent"

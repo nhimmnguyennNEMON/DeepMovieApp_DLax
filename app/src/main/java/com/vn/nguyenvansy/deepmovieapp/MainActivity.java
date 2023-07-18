@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.vn.nguyenvansy.deepmovieapp.utils.DataCenter;
+import com.vn.nguyenvansy.deepmovieapp.utils.FirebaseUtils;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.GetStarted;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.Login;
 
@@ -23,15 +25,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-
-    FirebaseFirestore firestore;
     private static final long DELAY_TIME = 3000; // Thời gian chờ trước khi chuyển đổi (đơn vị: millisecond)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+    void bindingDataFirebase() {
+        FirebaseUtils firebaseUtils = FirebaseUtils.getInstance();
+        firebaseUtils.handleListMovieFromFirestore();
+    }
+    void setUpTimeCallActivity() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -40,5 +40,12 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, DELAY_TIME);
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        bindingDataFirebase();
+        setUpTimeCallActivity();
     }
 }

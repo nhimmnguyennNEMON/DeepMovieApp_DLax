@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.models.User;
+import com.vn.nguyenvansy.deepmovieapp.viewActivity.HomePage;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.Login;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.Setting;
 
@@ -37,16 +38,21 @@ public class ProfileFragment extends Fragment {
 
     private View view;
     private Button btnLogout;
+    private Button btnHistory;
+    private Button btnFavorie;
     private Button btnSetting;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private FirebaseFirestore firestore;
     private ImageView imgProfile;
     private TextView txtName;
+    private FavourieFragment favourieFragment;
 
     void bindingView() {
         btnLogout = view.findViewById(R.id.btnLogout);
+        btnHistory = view.findViewById(R.id.btnHistory);
         btnSetting = view.findViewById(R.id.btnSetting);
+        btnFavorie = view.findViewById(R.id.btnFavorie);
         imgProfile = view.findViewById(R.id.imgProfile);
         txtName = view.findViewById(R.id.txtName);
     }
@@ -54,6 +60,26 @@ public class ProfileFragment extends Fragment {
     void bindingAction() {
         btnLogout.setOnClickListener(this::onClickBtnLogout);
         btnSetting.setOnClickListener(this::onClickBtnSetting);
+        btnHistory.setOnClickListener(this::onClickBtnHis);
+        btnFavorie.setOnClickListener(this::onClickBtnFavourie);
+    }
+
+    private void onClickBtnFavourie(View view) {
+//        if (favourieFragment == null) {
+//            favourieFragment = new FavourieFragment();
+//        }
+//        getChildFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.fragmentContainerView, favourieFragment)
+//                .addToBackStack(null)
+//                .commit();
+        Intent intent = new Intent(getActivity(), HomePage.class);
+        startActivity(intent);
+    }
+
+    private void onClickBtnHis(View view) {
+        Intent intent = new Intent(getActivity(), HomePage.class);
+        startActivity(intent);
     }
 
     private void onClickBtnSetting(View view) {

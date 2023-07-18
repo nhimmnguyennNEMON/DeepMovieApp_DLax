@@ -29,7 +29,6 @@ public class HomePage extends AppCompatActivity {
     private FavourieFragment favourieFragment;
     private SearchFragment searchFragment;
     private ProfileFragment profileFragment;
-    private DetailMovieFragment detailMovieFragment;
 
     void bindingView() {
         btnHome = findViewById(R.id.imageView);
@@ -57,12 +56,12 @@ public class HomePage extends AppCompatActivity {
     }
 
     private void onClickBtnFavourie(View view) {
-        if (detailMovieFragment == null) {
-            detailMovieFragment = new DetailMovieFragment();
+        if (favourieFragment == null) {
+            favourieFragment = new FavourieFragment();
         }
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainerView, detailMovieFragment)
+                .replace(R.id.fragmentContainerView, favourieFragment)
                 .addToBackStack(null)
                 .commit();
     }

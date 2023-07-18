@@ -1,5 +1,6 @@
 package com.vn.nguyenvansy.deepmovieapp.viewFragment;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,38 +19,103 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.itemConfigAdapter.MovieAdapter;
 import com.vn.nguyenvansy.deepmovieapp.models.Movie;
+import com.vn.nguyenvansy.deepmovieapp.models.User;
+import com.vn.nguyenvansy.deepmovieapp.utils.CheckApplication;
+import com.vn.nguyenvansy.deepmovieapp.viewActivity.HomePage;
 
 public class DetailMovieFragment extends Fragment {
 
     private View view;
     private ExoPlayer player;
     private StyledPlayerView playerView;
+    private TextView txtTitle;
+    private TextView txtRelease;
+    private TextView txtGenre;
+    private TextView txtDirector;
+    private TextView txtDescription;
+    private ImageView imgYeuThich;
+    private FirebaseFirestore firestore;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+
+    private Movie movie;
 
     void bindingView() {
         playerView = view.findViewById(R.id.player_view);
+        txtTitle = view.findViewById(R.id.txtTitle);
+        txtRelease = view.findViewById(R.id.txtRelease);
+        txtGenre = view.findViewById(R.id.txtGenre);
+        txtDirector = view.findViewById(R.id.txtDirector);
+        txtDescription = view.findViewById(R.id.txtDescription);
+        imgYeuThich = view.findViewById(R.id.imgYeuThich);
     }
 
     void bindingAction() {
+        imgYeuThich.setOnClickListener(this::onClickBtnYeuThich);
+    }
 
+    private void onClickBtnYeuThich(View view) {
+
+        CheckApplication checkApplication = CheckApplication.getInstance();
+        boolean check = checkApplication.isCheck();
+
+        Movie newMovie = new Movie();
+        newMovie.setTitle(movie.getTitle());
+        newMovie.setUrlMovie(movie.getUrlMovie());
+        newMovie.setUrlImageMovie(movie.getUrlImageMovie());
+        newMovie.setGenre(movie.getGenre());
+        newMovie.setDirector(movie.getDirector());
+
+        firestore.collection("favourite").document(currentUser.getUid()).set(newMovie)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getActivity(),
+                                "Your add " + movie.getTitle() + " to Favourite Successfull!",
+                                Toast.LENGTH_SHORT).show();
+                        checkApplication.setCheck(true);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(),
+                                "Your add " + movie.getTitle() + " to Favourite Fail!",
+                                Toast.LENGTH_SHORT).show();
+                        checkApplication.setCheck(false);
+                    }
+                });
     }
 
     void setupContentMovie() {
-
-    }
-
-    void setupViewPlayMovie() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Movie movie = (Movie) bundle.getParcelable("movie");
+            movie = (Movie) bundle.getParcelable("movie");
+
+            txtTitle.setText(movie.getTitle());
+            txtRelease.setText("- Release: " + movie.getReleaseDate());
+            txtGenre.setText("- Genre: " + movie.getGenre());
+            txtDirector.setText("- Director: " + movie.getDirector());
+            txtDescription.setText("- Description: " + movie.getDescription());
+
             player = new ExoPlayer.Builder(getActivity()).build();
             playerView.setPlayer(player);
             MediaItem mediaItem = MediaItem.fromUri(movie.getUrlMovie());
@@ -68,9 +134,12 @@ public class DetailMovieFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        firestore = FirebaseFirestore.getInstance();
         bindingView();
         bindingAction();
-        setupViewPlayMovie();
+        setupContentMovie();
     }
 
     @Override
