@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.vn.nguyenvansy.deepmovieapp.R;
 
 public class SearchFragment extends Fragment {
 
+    private EditText txtSearch;
+    private
     void bindingView() {
 
     }

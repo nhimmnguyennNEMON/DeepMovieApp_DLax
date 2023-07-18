@@ -37,7 +37,7 @@
             android:id="@+id/textNameFilmValue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Search..."
+            android:hint="Input Name Movie ..."
             android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
