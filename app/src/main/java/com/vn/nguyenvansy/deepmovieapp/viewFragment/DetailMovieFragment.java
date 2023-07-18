@@ -122,6 +122,29 @@ public class DetailMovieFragment extends Fragment {
             player.setMediaItem(mediaItem);
             player.prepare();
             player.setPlayWhenReady(true);
+
+            Movie newMovie = new Movie();
+            newMovie.setTitle(movie.getTitle());
+            newMovie.setUrlMovie(movie.getUrlMovie());
+            newMovie.setUrlImageMovie(movie.getUrlImageMovie());
+            newMovie.setGenre(movie.getGenre());
+            newMovie.setDirector(movie.getDirector());
+
+            firestore.collection("history").add(newMovie).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    Toast.makeText(getActivity(),
+                            "Your add " + movie.getTitle() + " to History Successfull!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(),
+                            "Your add " + movie.getTitle() + " to History Fail!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

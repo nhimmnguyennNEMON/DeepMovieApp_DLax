@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewFragment.FavourieFragment"
+    tools:context=".viewActivity.History"
     android:background="@color/background1">
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="30dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="363dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_6" />
 
     <TextView
         android:id="@+id/textView6"
@@ -17,7 +30,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="0dp"
         android:fontFamily="sans-serif-black"
-        android:text="Favourite"
+        android:text="History"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"/>

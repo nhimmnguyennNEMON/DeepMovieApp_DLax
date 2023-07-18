@@ -19,6 +19,9 @@
         android:theme="@style/Theme.DeepMovieApp"
         tools:targetApi="31">
         <activity
+            android:name=".viewActivity.History"
+            android:exported="false" />
+        <activity
             android:name=".viewActivity.TrendingFilm"
             android:exported="false" />
         <activity
@@ -55,6 +58,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-</application>
+    </application>
 
 </manifest>

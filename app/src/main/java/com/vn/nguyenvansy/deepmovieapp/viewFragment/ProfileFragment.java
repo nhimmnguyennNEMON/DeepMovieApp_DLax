@@ -26,9 +26,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.models.User;
+import com.vn.nguyenvansy.deepmovieapp.viewActivity.History;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.HomePage;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.Login;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.Setting;
+import com.vn.nguyenvansy.deepmovieapp.viewActivity.TrendingFilm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,7 @@ public class ProfileFragment extends Fragment {
     private Button btnHistory;
     private Button btnFavorie;
     private Button btnSetting;
+    private Button btnChatWithAI;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private FirebaseFirestore firestore;
@@ -51,6 +54,7 @@ public class ProfileFragment extends Fragment {
     void bindingView() {
         btnLogout = view.findViewById(R.id.btnLogout);
         btnHistory = view.findViewById(R.id.btnHistory);
+        btnChatWithAI = view.findViewById(R.id.btnChatWithAI);
         btnSetting = view.findViewById(R.id.btnSetting);
         btnFavorie = view.findViewById(R.id.btnFavorie);
         imgProfile = view.findViewById(R.id.imgProfile);
@@ -62,6 +66,7 @@ public class ProfileFragment extends Fragment {
         btnSetting.setOnClickListener(this::onClickBtnSetting);
         btnHistory.setOnClickListener(this::onClickBtnHis);
         btnFavorie.setOnClickListener(this::onClickBtnFavourie);
+        btnChatWithAI.setOnClickListener(this::onClickChatAI);
     }
 
     private void onClickBtnFavourie(View view) {
@@ -77,8 +82,13 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
+    private void onClickChatAI(View view) {
+        Intent intent = new Intent(getActivity(), TrendingFilm.class);
+        startActivity(intent);
+    }
+
     private void onClickBtnHis(View view) {
-        Intent intent = new Intent(getActivity(), HomePage.class);
+        Intent intent = new Intent(getActivity(), History.class);
         startActivity(intent);
     }
 

@@ -31,7 +31,6 @@ import java.util.List;
 
 public class Setting extends AppCompatActivity {
 
-    private Button btnChatWithAI;
     private Button btnChangePassword;
     private Button btnHelp;
     private ImageView imgBack;
@@ -42,7 +41,6 @@ public class Setting extends AppCompatActivity {
     private TextView txtName;
 
     void bindingView() {
-        btnChatWithAI = findViewById(R.id.btnChatWithAI);
         btnChangePassword = findViewById(R.id.btnChangePassword);
         btnHelp = findViewById(R.id.btnHelp);
         imgBack = findViewById(R.id.imgBack);
@@ -51,7 +49,6 @@ public class Setting extends AppCompatActivity {
     }
 
     void bindingAction() {
-        btnChatWithAI.setOnClickListener(this::onClickChatAI);
         btnChangePassword.setOnClickListener(this::onClickChangPass);
         btnHelp.setOnClickListener(this::onClickBtnHelp);
         imgBack.setOnClickListener(this::onClickBtnBack);
@@ -99,10 +96,6 @@ public class Setting extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ForgotPassword.class);
         startActivity(intent);
         finish();
-    }
-
-    private void onClickChatAI(View view) {
-
     }
 
     @Override
