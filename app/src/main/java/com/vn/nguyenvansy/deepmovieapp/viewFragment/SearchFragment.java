@@ -5,23 +5,34 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.vn.nguyenvansy.deepmovieapp.R;
 
 public class SearchFragment extends Fragment {
 
     private EditText txtSearch;
-    private
+    private View view;
+    private ImageView btnNameFilm;
+    private RecyclerView rcv_contentViewMovieSearch;
     void bindingView() {
-
+     txtSearch.findViewById(R.id.textNameFilmValue);
+     btnNameFilm.findViewById(R.id.textNameFilm);
+     rcv_contentViewMovieSearch = view.findViewById(R.id.rcv_contentViewMovieSearch);
     }
 
     void bindingAction() {
+        btnNameFilm.setOnClickListener(this::onClickBtnSearch);
+
+    }
+
+    private void onClickBtnSearch(View view) {
 
     }
 
