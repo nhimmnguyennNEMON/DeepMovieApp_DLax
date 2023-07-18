@@ -19,6 +19,14 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
 
     private List<Movie> listMovie;
+    private OnItemClickListener listener;
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener() {
+        this.listener = listener;
+    }
 
     public void setData(List<Movie> list) {
         this.listMovie = list;
@@ -38,9 +46,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         if (movie == null) { return; }
 
         Picasso.get().load(movie.getUrlImageMovie()).into(holder.imgFilm);
-        //holder.imgFilm.setImageResource(movie.getId());
         holder.textNameMovie.setText(movie.getTitle());
         Log.w("sy.nguyenvan", "MovieAdapter " + movie.getId());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override

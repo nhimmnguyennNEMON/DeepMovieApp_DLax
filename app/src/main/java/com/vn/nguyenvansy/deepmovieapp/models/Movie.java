@@ -61,7 +61,7 @@ public class Movie {
         this.description = description;
     }
 
-    public Movie(int id, String title, String urlImageMovie, String genre, String director, String releaseDate, String description) {
+    public Movie(int id, String title, String urlImageMovie, String genre, String director, String releaseDate, String description, String urlMovie) {
         this.id = id;
         this.title = title;
         this.urlImageMovie = urlImageMovie;
@@ -69,6 +69,7 @@ public class Movie {
         this.director = director;
         this.releaseDate = releaseDate;
         this.description = description;
+        this.urlMovie = urlMovie;
     }
 
     private int id;
@@ -78,5 +79,15 @@ public class Movie {
     private String director;
     private String releaseDate;
     private String description;
+
+    public String getUrlMovie() {
+        return urlMovie;
+    }
+
+    public void setUrlMovie(String urlMovie) {
+        this.urlMovie = urlMovie;
+    }
+
+    private String urlMovie;
 
 }

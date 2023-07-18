@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,12 +25,21 @@ import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.vn.nguyenvansy.deepmovieapp.R;
+import com.vn.nguyenvansy.deepmovieapp.itemConfigAdapter.MovieAdapter;
+import com.vn.nguyenvansy.deepmovieapp.models.Movie;
 
 public class DetailMovieFragment extends Fragment {
 
     private View view;
     private ExoPlayer player;
     private StyledPlayerView playerView;
+
+    public static Fragment newInstance(Movie movie) {
+        MovieAdapter adapter = new MovieAdapter();
+        adapter.setOnItemClickListener();
+        return null;
+    }
+
     void bindingView() {
         playerView = view.findViewById(R.id.player_view);
     }
