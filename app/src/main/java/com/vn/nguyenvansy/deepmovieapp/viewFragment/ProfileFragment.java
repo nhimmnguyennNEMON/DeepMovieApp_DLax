@@ -37,7 +37,6 @@ import java.util.List;
 
 
 public class ProfileFragment extends Fragment {
-
     private View view;
     private Button btnLogout;
     private Button btnHistory;

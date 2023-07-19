@@ -41,7 +41,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
-
     private Button btnLogin;
     private Button btnLoginGG;
     private TextInputEditText edtEmailValue;
@@ -177,10 +176,13 @@ public class Login extends AppCompatActivity {
                             users.setName(user.getDisplayName());
                             users.setProfile(user.getPhotoUrl().toString());
 
-                            firestore.collection("user").add(users).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            firestore.collection("user")
+                                    .add(users).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(getApplicationContext(), "Login with google successfull!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),
+                                            "Login with google successfull!",
+                                            Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                     startActivity(intent);
                                     finish();
@@ -188,7 +190,9 @@ public class Login extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "Login with google fail!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),
+                                            "Login with google fail!",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             });
                         } else {

@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.vn.nguyenvansy.deepmovieapp.R;
 
 public class Register extends AppCompatActivity {
-
     private Button btnRegister;
     private TextInputEditText edtEmailValue;
     private TextInputEditText edtPasswordValue;

@@ -49,7 +49,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         Picasso.get().load(movie.getUrlImageMovie()).into(holder.imgFilm);
         holder.textNameMovie.setText(movie.getTitle());
-        //Log.w("sy.nguyenvan", "MovieAdapter " + movie.getId());
+        //Log.w("sy.nguyenvan", "MovieAdapter " + movie.getTitle());
 
         holder.imgFilm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +75,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-
             imgFilm = itemView.findViewById(R.id.imgFilm);
             textNameMovie = itemView.findViewById(R.id.textNameMovie);
 

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-
     private EditText txtSearch;
     private View view;
     private ImageView btnSearchFilm;

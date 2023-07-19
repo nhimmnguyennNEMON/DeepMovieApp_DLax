@@ -35,7 +35,6 @@ package com.vn.nguyenvansy.deepmovieapp.viewActivity;
         import okhttp3.Response;
 
 public class TrendingFilm extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private TextView welcomeTextView;
     private EditText messageEditText;

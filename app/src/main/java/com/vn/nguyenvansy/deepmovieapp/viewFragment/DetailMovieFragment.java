@@ -42,7 +42,6 @@ import com.vn.nguyenvansy.deepmovieapp.utils.CheckApplication;
 import com.vn.nguyenvansy.deepmovieapp.viewActivity.HomePage;
 
 public class DetailMovieFragment extends Fragment {
-
     private View view;
     private ExoPlayer player;
     private StyledPlayerView playerView;
@@ -130,7 +129,8 @@ public class DetailMovieFragment extends Fragment {
             newMovie.setGenre(movie.getGenre());
             newMovie.setDirector(movie.getDirector());
 
-            firestore.collection("history").add(newMovie).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            firestore.collection("history")
+                    .add(newMovie).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Toast.makeText(getActivity(),

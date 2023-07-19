@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.vn.nguyenvansy.deepmovieapp.R;
 
 public class ForgotPassword extends AppCompatActivity {
-
     private Button btnForgot;
     private TextInputEditText edtEmailForgotValue;
     private ProgressBar prgLoadingg;
@@ -53,7 +52,9 @@ public class ForgotPassword extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(getApplicationContext(), "Send password to email " + email + "successfull!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Send password to email " + email + "successfull!",
+                                Toast.LENGTH_SHORT).show();
                         prgLoadingg.setVisibility(View.GONE);
                         Intent intent = new Intent(getApplicationContext(), Login.class);
                         startActivity(intent);
@@ -63,7 +64,9 @@ public class ForgotPassword extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Send password fail! \n" + email + "don' exist!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Send password fail! \n" + email + "don' exist!",
+                                Toast.LENGTH_SHORT).show();
                         prgLoadingg.setVisibility(View.GONE);
                     }
                 });

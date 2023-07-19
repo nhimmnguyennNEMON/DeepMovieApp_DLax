@@ -55,7 +55,6 @@ public class ListMovieGenreAdapter extends RecyclerView.Adapter<ListMovieGenreAd
         if (listGenre == null) { return; }
 
         holder.txtMovieTitle.setText(listGenre.getGenre());
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,
                 RecyclerView.HORIZONTAL,
                 false);
@@ -63,8 +62,6 @@ public class ListMovieGenreAdapter extends RecyclerView.Adapter<ListMovieGenreAd
 
         MovieAdapter movieAdapter = new MovieAdapter();
         movieAdapter.setData(listGenre.getMovies());
-
-
         movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie) {
@@ -87,7 +84,6 @@ public class ListMovieGenreAdapter extends RecyclerView.Adapter<ListMovieGenreAd
         private RecyclerView rcv_Movie;
         public ListGenreViewHolder(@NonNull View itemView) {
             super(itemView);
-
             rcv_Movie = itemView.findViewById(R.id.rcv_Movie);
             txtMovieTitle = itemView.findViewById(R.id.txtMovieTitle);
         }

@@ -53,7 +53,6 @@ public class History extends AppCompatActivity {
         finish();
     }
     void setupRecyclerView() {
-
         listMovieGenre.clear();
 
         listMovieGenreAdapter = new ListMovieGenreAdapter(getApplicationContext());

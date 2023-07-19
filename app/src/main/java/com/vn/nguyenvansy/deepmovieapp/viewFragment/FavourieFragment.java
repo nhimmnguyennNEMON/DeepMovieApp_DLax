@@ -53,9 +53,6 @@ public class FavourieFragment extends Fragment {
     }
 
     void setupRecyclerView() {
-
-        listMovieGenre.clear();
-
         listMovieGenreAdapter = new ListMovieGenreAdapter(view.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager( view.getContext(),
                 RecyclerView.VERTICAL,
@@ -70,6 +67,8 @@ public class FavourieFragment extends Fragment {
         CheckApplication checkApplication = CheckApplication.getInstance();
         boolean check = checkApplication.isCheck();
 
+        listMovieGenre.clear();
+
         CollectionReference movieCollectionRef = firestore.collection("favourite");
         movieCollectionRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -81,8 +80,8 @@ public class FavourieFragment extends Fragment {
                     if (check) {
                         listMovies.add(movie);
                     }
-                    listMovieGenre.add(new ListMovieGenre("", listMovies));
                 }
+                listMovieGenre.add(new ListMovieGenre("", listMovies));
                 listMovieGenreAdapter.notifyDataSetChanged();
                 checkApplication.setCheck(false);
             }

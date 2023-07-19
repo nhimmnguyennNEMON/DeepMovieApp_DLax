@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Setting extends AppCompatActivity {
-
     private Button btnChangePassword;
     private Button btnHelp;
     private ImageView imgBack;
