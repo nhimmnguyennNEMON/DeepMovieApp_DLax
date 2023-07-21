@@ -64,8 +64,8 @@ public class FavourieFragment extends Fragment {
 
     private List<ListMovieGenre> getListMovie() {
 
-        CheckApplication checkApplication = CheckApplication.getInstance();
-        boolean check = checkApplication.isCheck();
+//        CheckApplication checkApplication = CheckApplication.getInstance();
+//        boolean check = checkApplication.isCheck();
 
         listMovieGenre.clear();
 
@@ -77,13 +77,14 @@ public class FavourieFragment extends Fragment {
                 for (DocumentSnapshot document : queryDocumentSnapshots) {
                     // Lấy thông tin từ DocumentSnapshot và thêm vào movieList
                     Movie movie = document.toObject(Movie.class);
-                    if (check) {
-                        listMovies.add(movie);
+                    if (movie.getUserId().contentEquals(currentUser.getUid())) {
+                        if (!listMovies.contains(movie)) {
+                            listMovies.add(movie);
+                        }
                     }
                 }
                 listMovieGenre.add(new ListMovieGenre("", listMovies));
                 listMovieGenreAdapter.notifyDataSetChanged();
-                checkApplication.setCheck(false);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

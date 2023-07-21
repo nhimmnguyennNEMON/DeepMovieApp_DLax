@@ -19,6 +19,7 @@ public class Movie implements Parcelable {
         releaseDate = in.readString();
         description = in.readString();
         urlMovie = in.readString();
+        userId = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -89,7 +90,7 @@ public class Movie implements Parcelable {
         this.description = description;
     }
 
-    public Movie(int id, String title, String urlImageMovie, String genre, String director, String releaseDate, String description, String urlMovie) {
+    public Movie(int id, String title, String urlImageMovie, String genre, String director, String releaseDate, String description, String urlMovie, String userId) {
         this.id = id;
         this.title = title;
         this.urlImageMovie = urlImageMovie;
@@ -98,6 +99,7 @@ public class Movie implements Parcelable {
         this.releaseDate = releaseDate;
         this.description = description;
         this.urlMovie = urlMovie;
+        this.userId = userId;
     }
 
     private int id;
@@ -107,6 +109,15 @@ public class Movie implements Parcelable {
     private String director;
     private String releaseDate;
     private String description;
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getUrlMovie() {
         return urlMovie;
@@ -133,5 +144,6 @@ public class Movie implements Parcelable {
         parcel.writeString(releaseDate);
         parcel.writeString(description);
         parcel.writeString(urlMovie);
+        parcel.writeString(userId);
     }
 }

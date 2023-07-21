@@ -69,6 +69,8 @@ public class History extends AppCompatActivity {
         CheckApplication checkApplication = CheckApplication.getInstance();
         boolean check = checkApplication.isCheck();
 
+        List<Movie> listMoviesTemp = new ArrayList<>();
+
         CollectionReference movieCollectionRef = firestore.collection("history");
         movieCollectionRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -77,7 +79,11 @@ public class History extends AppCompatActivity {
                 for (DocumentSnapshot document : queryDocumentSnapshots) {
                     // Lấy thông tin từ DocumentSnapshot và thêm vào movieList
                     Movie movie = document.toObject(Movie.class);
-                    listMovies.add(movie);
+                    if (movie.getUserId().contentEquals(currentUser.getUid())) {
+                        if (!listMovies.contains(movie)) {
+                            listMovies.add(movie);
+                        }
+                    }
                 }
                 listMovieGenre.add(new ListMovieGenre("", listMovies));
                 listMovieGenreAdapter.notifyDataSetChanged();

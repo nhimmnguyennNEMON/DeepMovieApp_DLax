@@ -36,6 +36,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.vn.nguyenvansy.deepmovieapp.R;
 import com.vn.nguyenvansy.deepmovieapp.itemConfigAdapter.MovieAdapter;
+import com.vn.nguyenvansy.deepmovieapp.models.Favourite_History;
 import com.vn.nguyenvansy.deepmovieapp.models.Movie;
 import com.vn.nguyenvansy.deepmovieapp.models.User;
 import com.vn.nguyenvansy.deepmovieapp.utils.CheckApplication;
@@ -73,33 +74,31 @@ public class DetailMovieFragment extends Fragment {
 
     private void onClickBtnYeuThich(View view) {
 
-        CheckApplication checkApplication = CheckApplication.getInstance();
-        boolean check = checkApplication.isCheck();
+        //CheckApplication checkApplication = CheckApplication.getInstance();
+        //boolean check = checkApplication.isCheck();
 
-        Movie newMovie = new Movie();
+        Favourite_History newMovie = new Favourite_History();
         newMovie.setTitle(movie.getTitle());
-        newMovie.setUrlMovie(movie.getUrlMovie());
         newMovie.setUrlImageMovie(movie.getUrlImageMovie());
         newMovie.setGenre(movie.getGenre());
         newMovie.setDirector(movie.getDirector());
+        newMovie.setId(movie.getId());
+        newMovie.setUserId(currentUser.getUid());
 
-        firestore.collection("favourite").document(currentUser.getUid()).set(newMovie)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        firestore.collection("favourite")
+                .add(newMovie).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(getActivity(),
                                 "Your add " + movie.getTitle() + " to Favourite Successfull!",
                                 Toast.LENGTH_SHORT).show();
-                        checkApplication.setCheck(true);
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getActivity(),
                                 "Your add " + movie.getTitle() + " to Favourite Fail!",
                                 Toast.LENGTH_SHORT).show();
-                        checkApplication.setCheck(false);
                     }
                 });
     }
@@ -124,10 +123,11 @@ public class DetailMovieFragment extends Fragment {
 
             Movie newMovie = new Movie();
             newMovie.setTitle(movie.getTitle());
-            newMovie.setUrlMovie(movie.getUrlMovie());
             newMovie.setUrlImageMovie(movie.getUrlImageMovie());
             newMovie.setGenre(movie.getGenre());
             newMovie.setDirector(movie.getDirector());
+            newMovie.setId(movie.getId());
+            newMovie.setUserId(currentUser.getUid());
 
             firestore.collection("history")
                     .add(newMovie).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
